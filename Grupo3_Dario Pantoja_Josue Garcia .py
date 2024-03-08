@@ -19,4 +19,9 @@ class Persona:
     # Método para asignar el nombre
     def asignar_nombre(self, nombre):
         self.__nombre = nombre
+    def ver_sexo(self):
+        return self.__sexo
 
+    # Método para asignar el sexo
+    def asignar_sexo(self, sexo):
+            self.__sexo = sexo
