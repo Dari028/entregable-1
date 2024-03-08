@@ -209,3 +209,64 @@ class ProtesisDeRodillas:
 
     def set_cantidad(self, cantidad):
         self.__cantidad = cantidad
+class Paciente(Persona):
+    def __init__(self,  implante=None ):
+        super().__init__()
+        self.__nombre = ""
+        self.__cedula = 0
+        self.__sexo = ""
+        self.__implantes = self._get_implantes(implante)
+        self.__fecha_revision = ""
+        self.__fecha_mantenimiento = ""
+
+    def _get_implantes(self, implante):
+        implante=int(implante)
+        if implante is None:
+            return None
+        elif implante == 1:
+            return protesis_cadera()
+        elif implante == 2:
+            return MarcapasosCardiacos()
+        elif implante == 3:
+            return StentsCoronarios()
+        elif implante == 4:
+            return ProtesisDeRodillas()
+
+    def ver_nombre(self):
+        return self.__nombre
+
+    def asignar_nombre(self, nombre):
+        self.__nombre = nombre
+
+    def ver_cedula(self):
+        return self.__cedula
+
+    def asignar_cedula(self, cedula):
+        self.__cedula = cedula
+
+    def ver_sexo(self):
+        return self.__sexo
+
+    def asignar_sexo(self, sexo):
+        self.__sexo = sexo
+
+    def ver_implantes(self):
+        if self.__implantes is None:
+            print("No implants")
+        else:
+            print(self.__implantes)
+
+    def asignar_implantes(self, implante):
+        self.__implantes = self._get_implantes(implante)
+
+    def ver_fecha_revision(self):
+        return self.__fecha_revision
+
+    def asignar_fecha_revision(self, fecha_revision):
+        self.__fecha_revision = fecha_revision
+
+    def ver_fecha_mantenimiento(self):
+        return self.__fecha_mantenimiento
+
+    def asignar_fecha_mantenimiento(self, fecha_mantenimiento):
+        self.__fecha_mantenimiento = fecha_mantenimiento
