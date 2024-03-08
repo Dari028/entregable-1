@@ -270,3 +270,31 @@ class Paciente(Persona):
 
     def asignar_fecha_mantenimiento(self, fecha_mantenimiento):
         self.__fecha_mantenimiento = fecha_mantenimiento
+class Medico(Persona):
+    def __init__(self, nombre="", cedula=0, sexo="", especialidad=""):
+        super().__init__(nombre, cedula, sexo)
+        self.__especialidad = especialidad
+
+    def ver_nombre(self):
+        return self.__nombre
+
+    def asignar_nombre(self, nombre):
+        self.__nombre = nombre
+
+    def ver_cedula(self):
+        return self.__cedula
+
+    def asignar_cedula(self, cedula):
+        self.__cedula = cedula
+
+    def ver_sexo(self):
+        return self.__sexo
+
+    def asignar_sexo(self, sexo):
+        self.__sexo = sexo
+
+    def ver_especialidad(self):
+        return self.__especialidad
+
+    def asignar_especialidad(self, especialidad):
+        self.__especialidad = especialidad
