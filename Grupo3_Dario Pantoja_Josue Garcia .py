@@ -61,7 +61,6 @@ class ImplantesDentales:
 
     def ver_cantidad(self):
         return self.__cantidad
-
 class protesis_cadera:
     def __init__(self):
         self.__id = 0
