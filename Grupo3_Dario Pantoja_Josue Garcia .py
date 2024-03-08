@@ -173,3 +173,40 @@ class StentsCoronarios:
 
     def set_cantidad(self, cantidad):
         self.__cantidad = cantidad
+class ProtesisDeRodillas:
+    def __init__(self):
+        self.__id = 0
+        self.__material = ""
+        self.__tipo_fijacion = ""
+        self.__tamaño = 0
+        self.__cantidad = 0
+
+    def get_id(self):
+        return self.__id
+
+    def set_id(self, id):
+        self.__id = id
+
+    def get_material(self):
+        return self.__material
+
+    def set_material(self, material):
+        self.__material = material
+
+    def get_tipo_fijacion(self):
+        return self.__tipo_fijacion
+
+    def set_tipo_fijacion(self, tipo_fijacion):
+        self.__tipo_fijacion = tipo_fijacion
+
+    def get_tamaño(self):
+        return self.__tamaño
+
+    def set_tamaño(self, tamaño):
+        self.__tamaño = tamaño
+
+    def get_cantidad(self):
+        return self.__cantidad
+
+    def set_cantidad(self, cantidad):
+        self.__cantidad = cantidad
