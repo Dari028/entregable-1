@@ -298,3 +298,21 @@ class Medico(Persona):
 
     def asignar_especialidad(self, especialidad):
         self.__especialidad = especialidad
+class Inventario:
+    def __init__(self):
+        self.__implantes = {}
+
+    def ver_implantes(self):
+        return self.__implantes
+
+    def agregar_implante(self, implante):
+        if implante.ver_id() in self.__implantes:
+            print(f"Ya existe un implante con id {implante.ver_id()}")
+        else:
+            self.__implantes[implante.ver_id()] = implante
+
+    def eliminar_implante(self, id):
+        if id in self.__implantes:
+            del self.__implantes[id]
+        else:
+            print(f"No existe un implante con el id {id}")
