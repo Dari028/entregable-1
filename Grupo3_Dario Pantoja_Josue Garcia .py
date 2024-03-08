@@ -62,3 +62,40 @@ class ImplantesDentales:
     def ver_cantidad(self):
         return self.cantidad
 
+class protesis_cadera:
+    def __init__(self,):
+        self.id = 0
+        self.material = ""
+        self.sistema_fijacion = ""
+        self.tamaño = 0
+        self.cantidad = 0
+
+    def ver_id(self):
+        return self.id
+
+    def asignar_id(self, id):
+        self.id = id
+
+    def ver_material(self):
+        return self.material
+
+    def asignar_material(self, material):
+        self.material = material
+
+    def ver_sistema_de_fijacion(self):
+        return self.sistema_fijacion
+
+    def asignar_sistema_de_fijacion(self, sistema_fijacion):
+        self.sistema_de_fijacion = sistema_fijacion
+
+    def ver_tamaño(self):
+        return self.tamaño
+
+    def asignar_tamaño(self, tamaño):
+        self.tamaño = tamaño
+
+    def ver_cantidad(self):
+        return self.cantidad
+
+    def asignar_cantidad(self, cantidad):
+        self.cantidad = cantidad
