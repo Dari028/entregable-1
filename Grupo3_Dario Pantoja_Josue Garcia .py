@@ -298,10 +298,42 @@ class Medico(Persona):
 
     def asignar_especialidad(self, especialidad):
         self.__especialidad = especialidad
-class Inventario:
+
+class Sitema:
     def __init__(self):
+        self.__pacientes = {}
+        self.__medicos = {}
         self.__implantes = {}
 
+    def ver_pacientes(self):
+        return self.__pacientes
+
+    def agregar_paciente(self, paciente):
+        if paciente.ver_cedula() in self.__pacientes:
+            print(f"Ya existe un paciente con cedula {paciente.ver_cedula()}")
+        else:
+            self.__pacientes[paciente.ver_cedula()] = paciente
+
+    def eliminar_paciente(self, cedula):
+        if cedula in self.__pacientes:
+            del self.__pacientes[cedula]
+        else:
+            print(f"No existe un paciente con cedula {cedula}")
+
+    def ver_medicos(self):
+        return self.__medicos
+
+    def agregar_medico(self, medico):
+        if medico.ver_cedula() in self.__medicos:
+            print(f"Ya existe un medico con cedula {medico.ver_cedula()}")
+        else:
+            self.__medicos[medico.ver_cedula()] = medico
+
+    def eliminar_medico(self, cedula):
+        if cedula in self.__medicos:
+            del self.__medicos[cedula]
+        else:
+            print(f"No existe un medico con cedula {cedula}")
     def ver_implantes(self):
         return self.__implantes
 
