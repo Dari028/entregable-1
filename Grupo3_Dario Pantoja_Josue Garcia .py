@@ -99,7 +99,7 @@ class protesis_cadera:
 
     def asignar_cantidad(self, cantidad):
         self.__cantidad = cantidad
-class MarcapasosCardiacos:
+class MarcapasosCardiacos:  
     def __init__(self):
         self.__id = 0
         self.__electrodos = 0
@@ -135,4 +135,41 @@ class MarcapasosCardiacos:
         return self.__cantidad
 
     def asignar_cantidad(self, cantidad):
+        self.__cantidad = cantidad
+class StentsCoronarios:
+    def __init__(self):
+        self.__id = 0
+        self.__longitud = 0
+        self.__diametro = 0
+        self.__material = ""
+        self.__cantidad = 0
+
+    def get_id(self):
+        return self.__id
+
+    def set_id(self, id):
+        self.__id = id
+
+    def get_longitud(self):
+        return self.__longitud
+
+    def set_longitud(self, longitud):
+        self.__longitud = longitud
+
+    def get_diametro(self):
+        return self.__diametro
+
+    def set_diametro(self, diametro):
+        self.__diametro = diametro
+
+    def get_material(self):
+        return self.__material
+
+    def set_material(self, material):
+        self.__material = material
+
+    def get_cantidad(self):
+        return self.__cantidad
+
+    def set_cantidad(self, cantidad):
         self.__cantidad = cantidad
