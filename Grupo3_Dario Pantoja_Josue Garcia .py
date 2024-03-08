@@ -25,3 +25,40 @@ class Persona:
     # Método para asignar el sexo
     def asignar_sexo(self, sexo):
             self.__sexo = sexo
+            
+class ImplantesDentales:
+    def __init__(self):
+        self._id = 0
+        self.forma = ""
+        self.sistema_fijacion = ""
+        self.material = ""
+        self.cantidad = 0
+
+    # Metodos para ver y asignar atributos
+    def ver_id(self):
+        return self._id
+
+    def asignar_id(self, _id):
+        self.id = _id
+
+    def ver_forma(self):
+        return self.forma
+
+    def asignar_forma(self, forma):
+        self.forma = forma
+
+    def ver_sistema_de_fijacion(self):
+        return self.sistema_fijacion
+
+    def asignar_sistema_de_fijacion(self, sistema_fijacion):
+        self.sistema_de_fijacion = sistema_fijacion
+
+    def ver_material(self):
+        return self.material
+
+    def asignar_material(self, material):
+        self.material = material
+
+    def ver_cantidad(self):
+        return self.cantidad
+
