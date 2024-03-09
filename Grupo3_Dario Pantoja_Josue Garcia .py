@@ -373,12 +373,12 @@ def main():
             D = input("Nombre medico: ")
             CD = input("Cedula medico: ")
             DS = input("Genero medico: ")
-            ND = Medico.asignar_nombre(D)
-            CCD = Medico.asignar_cedula(CD)
-            DDS = Medico.asignar_sexo(DS)
-            
-            #asignar doctor 
-            
+
+            Med = Medico()
+            ND = Med.asignar_nombre(D)
+            CCD = Med.asignar_cedula(CD)
+            DDS = Med.asignar_sexo(DS)
+
             I = int(input("""Implante:
                     1. Protesis Cadera
                     2. Marcapasos Cardiacos
@@ -391,10 +391,12 @@ def main():
                 b = input("Material: ")
                 c = input("Sistema de fijacion: ")
                 d = int(input("Tamaño: "))
-                ID = protesis_cadera.asignar_id(a)
-                MA = protesis_cadera.asignar_material(b)
-                SF = protesis_cadera.asignar_sistema_fijacion(c)
-                T = protesis_cadera.asignar_tamaño(d)
+
+                PC = protesis_cadera()
+                ID = PC.asignar_id(a)
+                MA = PC.asignar_material(b)
+                SF = PC.asignar_sistema_fijacion(c)
+                T = PC.asignar_tamaño(d)
 
                 pac.asignar_implantes(ID)
                 pac.asignar_implantes(MA)
@@ -406,10 +408,12 @@ def main():
                 b = int(input("Electrodos: "))
                 c = input("Frecuencia de estimulacion: ")
                 d = input("Tipo de conexion: ")
-                ID = MarcapasosCardiacos.asignar_id(a)
-                E = MarcapasosCardiacos.asignar_electrodos(b)
-                FE = MarcapasosCardiacos.asignar_frecuencia_estimulacion(c)
-                TC = MarcapasosCardiacos.asignar_tipo_conexion(d)
+
+                MC = MarcapasosCardiacos()
+                ID = MC.asignar_id(a)
+                E = MC.asignar_electrodos(b)
+                FE = MC.asignar_frecuencia_estimulacion(c)
+                TC = MC.asignar_tipo_conexion(d)
 
                 pac.asignar_implantes(ID)
                 pac.asignar_implantes(E)
@@ -421,10 +425,12 @@ def main():
                 b = input("Forma: ")
                 c = input("Material: ")
                 d = input("Sistema de fijacion: ")
-                ID = ImplantesDentales.asignar_id(a)
-                FO = ImplantesDentales.asignar_forma(b)
-                MA = ImplantesDentales.asignar_material(c)
-                SF = ImplantesDentales.asignar_sistema_de_fijacion(d)
+
+                IMD = ImplantesDentales()
+                ID = IMD.asignar_id(a)
+                FO = IMD.asignar_forma(b)
+                MA = IMD.asignar_material(c)
+                SF = IMD.asignar_sistema_de_fijacion(d)
 
                 pac.asignar_implantes(ID)
                 pac.asignar_implantes(FO)
@@ -437,10 +443,12 @@ def main():
                 b = input("Material: ")
                 c = int(input("Tamaño: "))
                 d = input("Tipo de fijacion: ")
-                ID = ProtesisDeRodillas.set_id(a)
-                M = ProtesisDeRodillas.set_material(b)
-                T = ProtesisDeRodillas.set_tamaño(c)
-                TF = ProtesisDeRodillas.set_tipo_fijacion(d)
+
+                PR = ProtesisDeRodillas()
+                ID = PR.set_id(a)
+                M = PR.set_material(b)
+                T = PR.set_tamaño(c)
+                TF = PR.set_tipo_fijacion(d)
 
                 pac.asignar_implantes(ID)
                 pac.asignar_implantes(M)
@@ -468,18 +476,13 @@ def main():
             print(P[C])            
 
         elif menu == "3":
-            pass
-        
-        elif menu == "4":
-            q = int(input("Cedula: "))
+             q = int(input("Cedula: "))
             p = Sistem.eliminar_paciente(q)
             print("El paciente con cedula {} a sido eliminado" .format(p))
-
-        elif menu == "5":
+        
+        elif menu == "4":
             break
 
-        else:
-            print("No es opcion")
 
 if __name__=='__main__':
     main()
