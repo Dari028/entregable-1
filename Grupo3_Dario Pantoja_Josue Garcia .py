@@ -370,17 +370,27 @@ def main():
             N = input("Nombre del paciente: ")
             C = input("Cedula del paciente: ")
             S = input("Ingresar genero del paciente: ")
+            D = input("Nombre medico: ")
+            CD = input("Cedula medico: ")
+            DS = input("Genero medico: ")
+            ND = Medico.asignar_nombre(D)
+            CCD = Medico.asignar_cedula(CD)
+            DDS = Medico.asignar_sexo(DS)
+            
+            #asignar doctor 
+            
             I = int(input("""Implante:
                     1. Protesis Cadera
                     2. Marcapasos Cardiacos
                     3. Stents Coronarios
                     4. Protesis De Rodillas
                           """))
+            pac = Paciente()
             if I == 1:
                 a = int(input("Id: "))
                 b = input("Material: ")
                 c = input("Sistema de fijacion: ")
-                d = input("Tamaño: ")
+                d = int(input("Tamaño: "))
                 ID = protesis_cadera.asignar_id(a)
                 MA = protesis_cadera.asignar_material(b)
                 SF = protesis_cadera.asignar_sistema_fijacion(c)
@@ -392,8 +402,8 @@ def main():
                 pac.asignar_implantes(T)
 
             elif I == 2:
-                a = input("Id: ")
-                b = input("Electrodos: ")
+                a = int(input("Id: "))
+                b = int(input("Electrodos: "))
                 c = input("Frecuencia de estimulacion: ")
                 d = input("Tipo de conexion: ")
                 ID = MarcapasosCardiacos.asignar_id(a)
@@ -407,7 +417,7 @@ def main():
                 pac.asignar_implantes(TC)
 
             elif I == 3:
-                a = input("Id: ")
+                a = int(input("Id: "))
                 b = input("Forma: ")
                 c = input("Material: ")
                 d = input("Sistema de fijacion: ")
@@ -423,9 +433,9 @@ def main():
 
 
             elif I == 4:
-                a = input("Id: ")
+                a = int(input("Id: "))
                 b = input("Material: ")
-                c = input("Tamaño: ")
+                c = int(input("Tamaño: "))
                 d = input("Tipo de fijacion: ")
                 ID = ProtesisDeRodillas.set_id(a)
                 M = ProtesisDeRodillas.set_material(b)
@@ -443,7 +453,6 @@ def main():
 
             Implante = []
             Implante.append(I)
-            pac = Paciente()
             pac.asignar_nombre(N)
             pac.asignar_cedula(C)
             pac.asignar_sexo(S)
