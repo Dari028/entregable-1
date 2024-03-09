@@ -299,7 +299,7 @@ class Medico(Persona):
     def asignar_especialidad(self, especialidad):
         self.__especialidad = especialidad
 
-class Sitema:
+class Sistema:
     def __init__(self):
         self.__pacientes = {}
         self.__medicos = {}
@@ -348,3 +348,44 @@ class Sitema:
             del self.__implantes[id]
         else:
             print(f"No existe un implante con el id {id}")
+
+
+def main():
+    Sitem = Sistema()
+    while True:
+        menu = input("""
+                    1. Registro de paciente
+                    2. Buscar paciente
+                    3. Cambiar implantes 
+                    4. Salir
+                     """)
+        
+        if menu == "1":
+            N = input("Nombre del paciente: ")
+            C = input("Cedula del paciente: ")
+            S = input("Ingresar genero del paciente: ")
+            I = input("Implante: ")
+            FR = input("Fecha de revision: ")
+            FM = input("Fecha de mantenimiento: ")
+
+            Paciente.asignar_nombre(N)
+            Paciente.asignar_cedula(C)
+            Paciente.asignar_sexo(S)
+            Paciente.asignar_implantes(I)
+            Paciente.asignar_fecha_revision(FR)
+            Paciente.asignar_fecha_mantenimiento(FM)
+
+        elif menu == "2":
+            pass
+
+        elif menu == "3":
+            pass
+
+        elif menu == "4":
+            break
+
+        else:
+            print("No es opcion")
+
+if __name__=='__main__':
+    main()
