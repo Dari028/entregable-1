@@ -476,12 +476,15 @@ def main():
             print(P[C])            
 
         elif menu == "3":
-             q = int(input("Cedula: "))
+            q = int(input("Cedula: "))
             p = Sistem.eliminar_paciente(q)
             print("El paciente con cedula {} a sido eliminado" .format(p))
         
         elif menu == "4":
             break
+
+        else:
+            print("No es opcion ")
 
 
 if __name__=='__main__':
