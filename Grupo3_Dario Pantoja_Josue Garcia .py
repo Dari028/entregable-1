@@ -409,73 +409,37 @@ def main():
                           """))
             pac = Paciente()
             if I == 1:
-                a = int(input("Id: "))
-                b = input("Material: ")
-                c = input("Sistema de fijacion: ")
-                d = int(input("Tamaño: "))
-
-                PC = protesis_cadera()
-                ID = PC.asignar_id(a)
-                MA = PC.asignar_material(b)
-                SF = PC.asignar_sistema_fijacion(c)
-                T = PC.asignar_tamaño(d)
-
-                pac.asignar_implantes(ID)
-                pac.asignar_implantes(MA)
-                pac.asignar_implantes(SF)
-                pac.asignar_implantes(T)
+                implante = protesis_cadera()
+                implante.asignar_id(int(input("Id: ")))
+                implante.asignar_material(input("Material: "))
+                implante.asignar_sistema_fijacion(input("Sistema de fijacion: "))
+                implante.asignar_tamaño(int(input("Tamaño: ")))
+                implante.asignar_cantidad(int(input("Cantidad: ")))
 
             elif I == 2:
-                a = int(input("Id: "))
-                b = int(input("Electrodos: "))
-                c = input("Frecuencia de estimulacion: ")
-                d = input("Tipo de conexion: ")
-
-                MC = MarcapasosCardiacos()
-                ID = MC.asignar_id(a)
-                E = MC.asignar_electrodos(b)
-                FE = MC.asignar_frecuencia_estimulacion(c)
-                TC = MC.asignar_tipo_conexion(d)
-
-                pac.asignar_implantes(ID)
-                pac.asignar_implantes(E)
-                pac.asignar_implantes(FE)
-                pac.asignar_implantes(TC)
+                implante = MarcapasosCardiacos()
+                implante.asignar_id(int(input("Id: ")))
+                implante.asignar_electrodos(int(input("Electrodos: ")))
+                implante.asignar_tipo_conexion(input("Tipo de conexion: "))
+                implante.asignar_frecuencia_estimulacion(float(input("Frecuencia de estimulacion: ")))
+                implante.asignar_cantidad(int(input("Cantidad: ")))
 
             elif I == 3:
-                a = int(input("Id: "))
-                b = input("Forma: ")
-                c = input("Material: ")
-                d = input("Sistema de fijacion: ")
-
-                IMD = ImplantesDentales()
-                ID = IMD.asignar_id(a)
-                FO = IMD.asignar_forma(b)
-                MA = IMD.asignar_material(c)
-                SF = IMD.asignar_sistema_de_fijacion(d)
-
-                pac.asignar_implantes(ID)
-                pac.asignar_implantes(FO)
-                pac.asignar_implantes(MA)
-                pac.asignar_implantes(SF)
+                implante = StentsCoronarios()
+                implante.asignar_id(int(input("Id: ")))
+                implante.asignar_longitud(float(input("Longitud: ")))
+                implante.asignar_diametro(float(input("Diametro: ")))
+                implante.asignar_material(input("Material: "))
+                implante.asignar_cantidad(int(input("Cantidad: ")))
 
 
             elif I == 4:
-                a = int(input("Id: "))
-                b = input("Material: ")
-                c = int(input("Tamaño: "))
-                d = input("Tipo de fijacion: ")
-
-                PR = ProtesisDeRodillas()
-                ID = PR.set_id(a)
-                M = PR.set_material(b)
-                T = PR.set_tamaño(c)
-                TF = PR.set_tipo_fijacion(d)
-
-                pac.asignar_implantes(ID)
-                pac.asignar_implantes(M)
-                pac.asignar_implantes(T)
-                pac.asignar_implantes(TF)
+                implante = ProtesisDeRodillas()
+                implante.asignar_id(int(input("Id: ")))
+                implante.asignar_material(input("Material: "))
+                implante.asignar_tipo_fijacion(input("Tipo de fijacion: "))
+                implante.asignar_tamaño(int(input("Tamaño: ")))
+                implante.asignar_cantidad(int(input("Cantidad: ")))
 
 
             FR = input("Fecha de revision: ")
@@ -495,7 +459,15 @@ def main():
         elif menu == "2":
             C = int(input("Cedula: "))
             P = Sistem.verDatosPacienteC(C)
-            print(P[C])            
+            if paciente is not None:
+                print(paciente.ver_nombre())
+                print(paciente.ver_cedula())
+                print(paciente.ver_sexo())
+                paciente.ver_implantes()
+                print(paciente.ver_fecha_revision())
+                print(paciente.ver_fecha_mantenimiento())
+            else:
+                print("No se encontró el paciente con cédula", C)
 
         elif menu == "3":
             q = int(input("Cedula: "))
