@@ -252,7 +252,7 @@ class Paciente(Persona):
 
     def ver_implantes(self):
         if self.__implantes is None:
-            print("No implants")
+            print("No implantes")
         else:
             print(self.__implantes)
 
@@ -362,8 +362,8 @@ def main():
                     1. Registro de paciente
                     2. Buscar paciente
                     3. Cambiar implantes 
-                    4. eliminar paciente
-                    4. Salir
+                    4. Eliminar paciente
+                    5. Salir
                      """)
         
         if menu == "1":
@@ -377,7 +377,7 @@ def main():
                     4. Protesis De Rodillas
                           """))
             if I == 1:
-                a = input("Id: ")
+                a = int(input("Id: "))
                 b = input("Material: ")
                 c = input("Sistema de fijacion: ")
                 d = input("Tamaño: ")
@@ -386,15 +386,26 @@ def main():
                 SF = protesis_cadera.asignar_sistema_fijacion(c)
                 T = protesis_cadera.asignar_tamaño(d)
 
+                pac.asignar_implantes(ID)
+                pac.asignar_implantes(MA)
+                pac.asignar_implantes(SF)
+                pac.asignar_implantes(T)
+
             elif I == 2:
                 a = input("Id: ")
                 b = input("Electrodos: ")
                 c = input("Frecuencia de estimulacion: ")
                 d = input("Tipo de conexion: ")
-                MarcapasosCardiacos.asignar_id()
-                MarcapasosCardiacos.asignar_electrodos()
-                MarcapasosCardiacos.asignar_frecuencia_estimulacion()
-                MarcapasosCardiacos.asignar_tipo_conexion()
+                ID = MarcapasosCardiacos.asignar_id(a)
+                E = MarcapasosCardiacos.asignar_electrodos(b)
+                FE = MarcapasosCardiacos.asignar_frecuencia_estimulacion(c)
+                TC = MarcapasosCardiacos.asignar_tipo_conexion(d)
+
+                pac.asignar_implantes(ID)
+                pac.asignar_implantes(E)
+                pac.asignar_implantes(FE)
+                pac.asignar_implantes(TC)
+
             elif I == 3:
                 a = input("Id: ")
                 b = input("Forma: ")
@@ -404,8 +415,27 @@ def main():
                 FO = ImplantesDentales.asignar_forma(b)
                 MA = ImplantesDentales.asignar_material(c)
                 SF = ImplantesDentales.asignar_sistema_de_fijacion(d)
+
+                pac.asignar_implantes(ID)
+                pac.asignar_implantes(FO)
+                pac.asignar_implantes(MA)
+                pac.asignar_implantes(SF)
+
+
             elif I == 4:
-                pass
+                a = input("Id: ")
+                b = input("Material: ")
+                c = input("Tamaño: ")
+                d = input("Tipo de fijacion: ")
+                ID = ProtesisDeRodillas.set_id(a)
+                M = ProtesisDeRodillas.set_material(b)
+                T = ProtesisDeRodillas.set_tamaño(c)
+                TF = ProtesisDeRodillas.set_tipo_fijacion(d)
+
+                pac.asignar_implantes(ID)
+                pac.asignar_implantes(M)
+                pac.asignar_implantes(T)
+                pac.asignar_implantes(TF)
 
 
             FR = input("Fecha de revision: ")
@@ -430,7 +460,13 @@ def main():
 
         elif menu == "3":
             pass
+        
         elif menu == "4":
+            q = int(input("Cedula: "))
+            p = Sistem.eliminar_paciente(q)
+            print("El paciente con cedula {} a sido eliminado" .format(p))
+
+        elif menu == "5":
             break
 
         else:
