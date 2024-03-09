@@ -220,7 +220,6 @@ class Paciente(Persona):
         self.__fecha_mantenimiento = ""
 
     def _get_implantes(self, implante):
-        implante=implante
         if implante is None:
             return None
         elif implante == 1:
@@ -231,6 +230,8 @@ class Paciente(Persona):
             return StentsCoronarios()
         elif implante == 4:
             return ProtesisDeRodillas()
+        else:
+            return None
 
     def ver_nombre(self):
         return self.__nombre
@@ -251,10 +252,30 @@ class Paciente(Persona):
         self.__sexo = sexo
 
     def ver_implantes(self):
-        if self.__implantes is None:
-            print("No implantes")
+        if self.__implantes is not None:
+            print("ID: ", self.__implantes.ver_id())
+            if isinstance(self.__implantes, protesis_cadera):
+                print("Material: ", self.__implantes.ver_material())
+                print("Sistema de fijacion: ", self.__implantes.ver_sistema_fijacion())
+                print("Tamaño: ", self.__implantes.ver_tamaño())
+                print("Cantidad: ", self.__implantes.ver_cantidad())
+            elif isinstance(self.__implantes, MarcapasosCardiacos):
+                print("Electrodos: ", self.__implantes.ver_electrodos())
+                print("Tipo de conexion: ", self.__implantes.ver_tipo_conexion())
+                print("Frecuencia de estimulacion: ", self.__implantes.ver_frecuencia_estimulacion())
+                print("Cantidad: ", self.__implantes.ver_cantidad())
+            elif isinstance(self.__implantes, StentsCoronarios):
+                print("Longitud: ", self.__implantes.get_longitud())
+                print("Diametro: ", self.__implantes.get_diametro())
+                print("Material: ", self.__implantes.get_material())
+                print("Cantidad: ", self.__implantes.get_cantidad())
+            elif isinstance(self.__implantes, ProtesisDeRodillas):
+                print("Material: ", self.__implantes.get_material())
+                print("Tipo de fijacion: ", self.__implantes.get_tipo_fijacion())
+                print("Tamaño: ", self.__implantes.get_tamaño())
+                print("Cantidad: ", self.__implantes.get_cantidad())
         else:
-            print(self.__implantes)
+            print("No hay implantes asignados")
 
     def asignar_implantes(self, implante):
         self.__implantes = self._get_implantes(implante)
@@ -349,10 +370,11 @@ class Sistema:
         else:
             print(f"No existe un implante con el id {id}")
 
-    def verDatosPacienteC(self, c): #definimos la forma en la que veremos los datos ya sea con cedula 
+    def verDatosPacienteC(self, c):
         if c in self.__pacientes:
-            for i in self.__pacientes[c]:
-                print(i[c])
+            return self.__pacientes[c]
+        else:
+            return None
 
 
 def main():
