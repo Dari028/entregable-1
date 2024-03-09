@@ -220,7 +220,7 @@ class Paciente(Persona):
         self.__fecha_mantenimiento = ""
 
     def _get_implantes(self, implante):
-        implante=int(implante)
+        implante=implante
         if implante is None:
             return None
         elif implante == 1:
@@ -349,6 +349,11 @@ class Sistema:
         else:
             print(f"No existe un implante con el id {id}")
 
+    def verDatosPacienteC(self, c): #definimos la forma en la que veremos los datos ya sea con cedula 
+        if c in self.__pacientes:
+            for i in self.__pacientes[c]:
+                print(i[c])
+
 
 def main():
     Sistem = Sistema()
@@ -357,6 +362,7 @@ def main():
                     1. Registro de paciente
                     2. Buscar paciente
                     3. Cambiar implantes 
+                    4. eliminar paciente
                     4. Salir
                      """)
         
@@ -364,23 +370,63 @@ def main():
             N = input("Nombre del paciente: ")
             C = input("Cedula del paciente: ")
             S = input("Ingresar genero del paciente: ")
-            I = input("Implante: ")
+            I = int(input("""Implante:
+                    1. Protesis Cadera
+                    2. Marcapasos Cardiacos
+                    3. Stents Coronarios
+                    4. Protesis De Rodillas
+                          """))
+            if I == 1:
+                a = input("Id: ")
+                b = input("Material: ")
+                c = input("Sistema de fijacion: ")
+                d = input("Tamaño: ")
+                ID = protesis_cadera.asignar_id(a)
+                MA = protesis_cadera.asignar_material(b)
+                SF = protesis_cadera.asignar_sistema_fijacion(c)
+                T = protesis_cadera.asignar_tamaño(d)
+
+            elif I == 2:
+                a = input("Id: ")
+                b = input("Electrodos: ")
+                c = input("Frecuencia de estimulacion: ")
+                d = input("Tipo de conexion: ")
+                MarcapasosCardiacos.asignar_id()
+                MarcapasosCardiacos.asignar_electrodos()
+                MarcapasosCardiacos.asignar_frecuencia_estimulacion()
+                MarcapasosCardiacos.asignar_tipo_conexion()
+            elif I == 3:
+                a = input("Id: ")
+                b = input("Forma: ")
+                c = input("Material: ")
+                d = input("Sistema de fijacion: ")
+                ID = ImplantesDentales.asignar_id(a)
+                FO = ImplantesDentales.asignar_forma(b)
+                MA = ImplantesDentales.asignar_material(c)
+                SF = ImplantesDentales.asignar_sistema_de_fijacion(d)
+            elif I == 4:
+                pass
+
+
             FR = input("Fecha de revision: ")
             FM = input("Fecha de mantenimiento: ")
 
-            Paciente.asignar_nombre(N)
-            Paciente.asignar_cedula(C)
-            Paciente.asignar_sexo(S)
-            Paciente.asignar_implantes(I)
-            Paciente.asignar_fecha_revision(FR)
-            Paciente.asignar_fecha_mantenimiento(FM)
+            Implante = []
+            Implante.append(I)
+            pac = Paciente()
+            pac.asignar_nombre(N)
+            pac.asignar_cedula(C)
+            pac.asignar_sexo(S)
+            pac.asignar_implantes(Implante)
+            pac.asignar_fecha_revision(FR)
+            pac.asignar_fecha_mantenimiento(FM)
+            Sistem.agregar_paciente(pac)
             
 
         elif menu == "2":
-            C = input("Cedula: ")
-            pac = Sistem.ver_pacientes(C)
-            for i in pac:
-                print("Nombre ")
+            C = int(input("Cedula: "))
+            P = Sistem.verDatosPacienteC(C)
+            print(P[C])            
 
         elif menu == "3":
             pass
