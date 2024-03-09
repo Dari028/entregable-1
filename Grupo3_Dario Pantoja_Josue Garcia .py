@@ -484,6 +484,7 @@ def main():
         elif menu == "2":
             C = int(input("Cedula: "))
             P = Sistem.verDatosPacienteC(C)
+            print(P)
 
 
         elif menu == "3":
