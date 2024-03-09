@@ -351,7 +351,7 @@ class Sistema:
 
 
 def main():
-    Sitem = Sistema()
+    Sistem = Sistema()
     while True:
         menu = input("""
                     1. Registro de paciente
@@ -374,13 +374,16 @@ def main():
             Paciente.asignar_implantes(I)
             Paciente.asignar_fecha_revision(FR)
             Paciente.asignar_fecha_mantenimiento(FM)
+            
 
         elif menu == "2":
-            pass
+            C = input("Cedula: ")
+            pac = Sistem.ver_pacientes(C)
+            for i in pac:
+                print("Nombre ")
 
         elif menu == "3":
             pass
-
         elif menu == "4":
             break
 
