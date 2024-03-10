@@ -59,6 +59,9 @@ class ImplantesDentales: #clase de implante
     def asignar_material(self, material):
         self.__material = material
 
+    def asignar_cantidad(self, cantidad):
+        self.__cantidad = cantidad
+    
     def ver_cantidad(self):
         return self.__cantidad
 class protesis_cadera: #clase de implante
@@ -146,34 +149,34 @@ class StentsCoronarios: #clase de implante
         self.__material = ""
         self.__cantidad = 0
 
-    def get_id(self):
+    def ver_id(self):
         return self.__id
 
-    def set_id(self, id):
+    def asignar_id(self, id):
         self.__id = id
 
-    def get_longitud(self):
+    def ver_longitud(self):
         return self.__longitud
 
-    def set_longitud(self, longitud):
+    def asignar_longitud(self, longitud):
         self.__longitud = longitud
 
-    def get_diametro(self):
+    def ver_diametro(self):
         return self.__diametro
 
-    def set_diametro(self, diametro):
+    def asignar_diametro(self, diametro):
         self.__diametro = diametro
 
-    def get_material(self):
+    def ver_material(self):
         return self.__material
 
-    def set_material(self, material):
+    def asignar_material(self, material):
         self.__material = material
 
-    def get_cantidad(self):
+    def ver_cantidad(self):
         return self.__cantidad
 
-    def set_cantidad(self, cantidad):
+    def asignar_cantidad(self, cantidad):
         self.__cantidad = cantidad
 
 class ProtesisDeRodillas: #clase de implante
@@ -184,34 +187,34 @@ class ProtesisDeRodillas: #clase de implante
         self.__tamaño = 0
         self.__cantidad = 0
 
-    def get_id(self):
+    def ver_id(self):
         return self.__id
 
-    def set_id(self, id):
+    def asignar_id(self, id):
         self.__id = id
 
-    def get_material(self):
+    def ver_material(self):
         return self.__material
 
-    def set_material(self, material):
+    def asignar_material(self, material):
         self.__material = material
 
-    def get_tipo_fijacion(self):
+    def ver_tipo_fijacion(self):
         return self.__tipo_fijacion
 
-    def set_tipo_fijacion(self, tipo_fijacion):
+    def asignar_tipo_fijacion(self, tipo_fijacion):
         self.__tipo_fijacion = tipo_fijacion
 
-    def get_tamaño(self):
+    def ver_tamaño(self):
         return self.__tamaño
 
-    def set_tamaño(self, tamaño):
+    def asignar_tamaño(self, tamaño):
         self.__tamaño = tamaño
 
-    def get_cantidad(self):
+    def ver_cantidad(self):
         return self.__cantidad
 
-    def set_cantidad(self, cantidad):
+    def asignar_cantidad(self, cantidad):
         self.__cantidad = cantidad
 class Paciente(Persona): #paciente hereda de Persona y damos las funciones
     def __init__(self,  implante=None ):
@@ -234,6 +237,8 @@ class Paciente(Persona): #paciente hereda de Persona y damos las funciones
             return StentsCoronarios()
         elif implante == 4:
             return ProtesisDeRodillas()
+        elif implante == 5:
+            return ImplantesDentales()
         else:
             return None
 
@@ -256,28 +261,39 @@ class Paciente(Persona): #paciente hereda de Persona y damos las funciones
         self.__sexo = sexo
 
     def ver_implantes(self):
-        if self.__implantes is not None:
+        if self.__implantes:
             print("ID: ", self.__implantes.ver_id())
-            if isinstance(self.__implantes, protesis_cadera):
+
+            if isinstance(self.__implantes, protesis_cadera()):
                 print("Material: ", self.__implantes.ver_material())
                 print("Sistema de fijacion: ", self.__implantes.ver_sistema_fijacion())
                 print("Tamaño: ", self.__implantes.ver_tamaño())
                 print("Cantidad: ", self.__implantes.ver_cantidad())
+
             elif isinstance(self.__implantes, MarcapasosCardiacos):
                 print("Electrodos: ", self.__implantes.ver_electrodos())
                 print("Tipo de conexion: ", self.__implantes.ver_tipo_conexion())
                 print("Frecuencia de estimulacion: ", self.__implantes.ver_frecuencia_estimulacion())
                 print("Cantidad: ", self.__implantes.ver_cantidad())
+
             elif isinstance(self.__implantes, StentsCoronarios):
-                print("Longitud: ", self.__implantes.get_longitud())
-                print("Diametro: ", self.__implantes.get_diametro())
-                print("Material: ", self.__implantes.get_material())
-                print("Cantidad: ", self.__implantes.get_cantidad())
+                print("Longitud: ", self.__implantes.ver_longitud())
+                print("Diametro: ", self.__implantes.ver_diametro())
+                print("Material: ", self.__implantes.ver_material())
+                print("Cantidad: ", self.__implantes.ver_cantidad())
+
             elif isinstance(self.__implantes, ProtesisDeRodillas):
-                print("Material: ", self.__implantes.get_material())
-                print("Tipo de fijacion: ", self.__implantes.get_tipo_fijacion())
-                print("Tamaño: ", self.__implantes.get_tamaño())
-                print("Cantidad: ", self.__implantes.get_cantidad())
+                print("Material: ", self.__implantes.ver_material())
+                print("Tipo de fijacion: ", self.__implantes.ver_tipo_fijacion())
+                print("Tamaño: ", self.__implantes.ver_tamaño())
+                print("Cantidad: ", self.__implantes.ver_cantidad())
+
+            elif isinstance(self.__implantes, ImplantesDentales):
+                print("Material: ", self.__implantes.ver_material())
+                print("Tipo de fijacion: ", self.__implantes.ver_sistema_de_fijacion())
+                print("Tamaño: ", self.__implantes.ver_forma())
+                print("Cantidad: ", self.__implantes.ver_cantidad())
+
         else:
             print("No hay implantes asignados")
 
@@ -381,6 +397,12 @@ class Sistema:
             return self.__pacientes[c]
         else:
             return None
+        
+    def buscar_paciente_ced(self, c):  #funcion para buscar cedulas en el diccionario pacientes
+        encontrado = False
+        if c in self.__pacientes:
+            encontrado = True
+        return encontrado
     
 def validar_N(N): #validar numeros 
     while  N.isdigit() != True:
@@ -422,6 +444,7 @@ def main():
                     2. Marcapasos Cardiacos
                     3. Stents Coronarios
                     4. Protesis De Rodillas
+                    5. Implantes Dentales
                           """))
             pac = Paciente()
             if I == 1:
@@ -461,6 +484,14 @@ def main():
                 implante.asignar_tamaño(validar_N(input("Tamaño: ")))
                 implante.asignar_cantidad(validar_N(input("Cantidad: ")))
 
+            elif I == 5:
+                implante = ImplantesDentales()
+                implante.asignar_id(validar_N(input("Id: ")))
+                implante.asignar_material(input("Material: "))
+                implante.asignar_sistema_de_fijacion(input("Sistema de fijacion: "))
+                implante.asignar_forma(input("Forma: "))
+                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
+
 
             FR = input("Fecha de revision: ")
             FM = input("Fecha de mantenimiento: ")
@@ -472,25 +503,27 @@ def main():
             pac.asignar_nombre(N)
             pac.asignar_cedula(C)
             pac.asignar_sexo(S)
-            pac.asignar_implantes(Implante)
+            pac.asignar_implantes(implante)
             pac.asignar_fecha_revision(FR)
             pac.asignar_fecha_mantenimiento(FM)
-            #guardamos el paciente en el sistema 
+            #guardamos el paciente en el sistema y el implante
+            Sistem.agregar_implante(implante)
             Sistem.agregar_paciente(pac)
             
 
         elif menu == "2":
             C = input("Cedula: ")
-            validar_N(C) #validamos la cedula
-            P = Sistem.verDatosPacienteC(C) #buscamos la cedula en los pacientes 
+            validar_N(C) #validamos la cedula 
+
+            if Sistem.buscar_paciente_ced(C): 
+                p = Sistem.verDatosPacienteC(C)
+                print("Nombre: " + p.ver_nombre())
+                print("Cedula: " + str(p.ver_cedula()))
+                print("Genero: " + p.ver_sexo())
+                print("Implantes: " + str(p.ver_implantes()))
+                print("Fecha Revision: " + p.ver_fecha_revision())
+                print("Fecha Mantenimiento: " + p.ver_fecha_mantenimiento())
     
-            if paciente is not None:    #si el paciente existe seguira correctamente
-                print(paciente.ver_pacientes())
-                print(paciente.ver_cedula())
-                print(paciente.ver_sexo())
-                print(paciente.ver_implantes())
-                print(paciente.ver_fecha_revision())
-                print(paciente.ver_fecha_mantenimiento())
             else: #si el paciente no existe 
                 print("No se encontró el paciente con cédula", C)
 
