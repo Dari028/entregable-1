@@ -32,7 +32,6 @@ class ImplantesDentales: #clase de implante
         self.__forma = ""
         self.__sistema_fijacion = ""
         self.__material = ""
-        self.__cantidad = 0
 
     # Metodos para ver y asignar atributos
     def ver_id(self):
@@ -58,20 +57,13 @@ class ImplantesDentales: #clase de implante
 
     def asignar_material(self, material):
         self.__material = material
-
-    def asignar_cantidad(self, cantidad):
-        self.__cantidad = cantidad
     
-    def ver_cantidad(self):
-        return self.__cantidad
 class protesis_cadera: #clase de implante
     def __init__(self):
         self.__id = 0
         self.__material = ""
         self.__sistema_fijacion = ""
         self.__tamaño = 0
-        self.__cantidad = 0
-
     #get
         
     def ver_id(self):
@@ -98,18 +90,12 @@ class protesis_cadera: #clase de implante
     def asignar_tamaño(self, tamaño):
         self.__tamaño = tamaño
 
-    def ver_cantidad(self):
-        return self.__cantidad
-
-    def asignar_cantidad(self, cantidad):
-        self.__cantidad = cantidad
 class MarcapasosCardiacos:  #clase de implante
     def __init__(self):
         self.__id = 0
         self.__electrodos = 0
         self.__tipo_conexion = ""
         self.__frecuencia_estimulacion = 0
-        self.__cantidad = 0
 
     def ver_id(self):
         return self.__id
@@ -135,11 +121,7 @@ class MarcapasosCardiacos:  #clase de implante
     def asignar_frecuencia_estimulacion(self, frecuencia_estimulacion):
         self.__frecuencia_estimulacion = frecuencia_estimulacion
 
-    def ver_cantidad(self):
-        return self.__cantidad
 
-    def asignar_cantidad(self, cantidad):
-        self.__cantidad = cantidad
 
 class StentsCoronarios: #clase de implante
     def __init__(self):
@@ -147,7 +129,6 @@ class StentsCoronarios: #clase de implante
         self.__longitud = 0
         self.__diametro = 0
         self.__material = ""
-        self.__cantidad = 0
 
     def ver_id(self):
         return self.__id
@@ -173,19 +154,12 @@ class StentsCoronarios: #clase de implante
     def asignar_material(self, material):
         self.__material = material
 
-    def ver_cantidad(self):
-        return self.__cantidad
-
-    def asignar_cantidad(self, cantidad):
-        self.__cantidad = cantidad
-
 class ProtesisDeRodillas: #clase de implante
     def __init__(self):
         self.__id = 0
         self.__material = ""
         self.__tipo_fijacion = ""
         self.__tamaño = 0
-        self.__cantidad = 0
 
     def ver_id(self):
         return self.__id
@@ -211,11 +185,7 @@ class ProtesisDeRodillas: #clase de implante
     def asignar_tamaño(self, tamaño):
         self.__tamaño = tamaño
 
-    def ver_cantidad(self):
-        return self.__cantidad
 
-    def asignar_cantidad(self, cantidad):
-        self.__cantidad = cantidad
 class Paciente(Persona): #paciente hereda de Persona y damos las funciones
     def __init__(self,  implante=None ):
         super().__init__()
@@ -226,22 +196,24 @@ class Paciente(Persona): #paciente hereda de Persona y damos las funciones
         self.__fecha_revision = ""
         self.__fecha_mantenimiento = ""
 
+    
     def _get_implantes(self, implante):
+        
+
         if implante is None:
             return None
-        elif implante == 1:
-            return protesis_cadera()
-        elif implante == 2:
-            return MarcapasosCardiacos()
-        elif implante == 3:
-            return StentsCoronarios()
-        elif implante == 4:
-            return ProtesisDeRodillas()
-        elif implante == 5:
-            return ImplantesDentales()
-        else:
-            return None
-
+        elif self.__implantes is None or not isinstance(self.__implantes, (protesis_cadera, MarcapasosCardiacos, StentsCoronarios, ProtesisDeRodillas, ImplantesDentales)) or type(self.__implantes) != type(implante):
+            if implante == 1:
+                self.__implantes = protesis_cadera
+            elif implante == 2:
+                self.__implantes = MarcapasosCardiacos
+            elif implante == 3:
+                self.__implantes = StentsCoronarios()
+            elif implante == 4:
+                self.__implantes = ProtesisDeRodillas()
+            elif implante == 5:
+                self.__implantes = ImplantesDentales()
+            return self.__implantes
     def ver_nombre(self):
         return self.__nombre
 
@@ -268,31 +240,31 @@ class Paciente(Persona): #paciente hereda de Persona y damos las funciones
                 print("Material: ", self.__implantes.ver_material())
                 print("Sistema de fijacion: ", self.__implantes.ver_sistema_fijacion())
                 print("Tamaño: ", self.__implantes.ver_tamaño())
-                print("Cantidad: ", self.__implantes.ver_cantidad())
+               
 
             elif isinstance(self.__implantes, MarcapasosCardiacos):
                 print("Electrodos: ", self.__implantes.ver_electrodos())
                 print("Tipo de conexion: ", self.__implantes.ver_tipo_conexion())
                 print("Frecuencia de estimulacion: ", self.__implantes.ver_frecuencia_estimulacion())
-                print("Cantidad: ", self.__implantes.ver_cantidad())
+                
 
             elif isinstance(self.__implantes, StentsCoronarios):
                 print("Longitud: ", self.__implantes.ver_longitud())
                 print("Diametro: ", self.__implantes.ver_diametro())
                 print("Material: ", self.__implantes.ver_material())
-                print("Cantidad: ", self.__implantes.ver_cantidad())
+               
 
             elif isinstance(self.__implantes, ProtesisDeRodillas):
                 print("Material: ", self.__implantes.ver_material())
                 print("Tipo de fijacion: ", self.__implantes.ver_tipo_fijacion())
                 print("Tamaño: ", self.__implantes.ver_tamaño())
-                print("Cantidad: ", self.__implantes.ver_cantidad())
+               
 
             elif isinstance(self.__implantes, ImplantesDentales):
                 print("Material: ", self.__implantes.ver_material())
                 print("Tipo de fijacion: ", self.__implantes.ver_sistema_de_fijacion())
                 print("Tamaño: ", self.__implantes.ver_forma())
-                print("Cantidad: ", self.__implantes.ver_cantidad())
+                
 
         else:
             print("No hay implantes asignados")
@@ -454,7 +426,7 @@ def main():
                 implante.asignar_material(input("Material: "))
                 implante.asignar_sistema_fijacion(input("Sistema de fijacion: "))
                 implante.asignar_tamaño(validar_N(input("Tamaño: ")))
-                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
+              
 
             elif I == 2:
                 #asignamos para guardar en implante
@@ -463,7 +435,7 @@ def main():
                 implante.asignar_electrodos(validar_N(input("Electrodos: ")))
                 implante.asignar_tipo_conexion(input("Tipo de conexion: "))
                 implante.asignar_frecuencia_estimulacion(validar_N(input("Frecuencia de estimulacion: ")))
-                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
+               
 
             elif I == 3:
                 #asignamos para guardar en implante
@@ -472,7 +444,7 @@ def main():
                 implante.asignar_longitud(validar_N(input("Longitud: ")))
                 implante.asignar_diametro(validar_N(input("Diametro: ")))
                 implante.asignar_material(input("Material: "))
-                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
+               
 
 
             elif I == 4:
@@ -482,7 +454,7 @@ def main():
                 implante.asignar_material(input("Material: "))
                 implante.asignar_tipo_fijacion(input("Tipo de fijacion: "))
                 implante.asignar_tamaño(validar_N(input("Tamaño: ")))
-                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
+             
 
             elif I == 5:
                 implante = ImplantesDentales()
@@ -490,15 +462,12 @@ def main():
                 implante.asignar_material(input("Material: "))
                 implante.asignar_sistema_de_fijacion(input("Sistema de fijacion: "))
                 implante.asignar_forma(input("Forma: "))
-                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
-
-
+            
+           
             FR = input("Fecha de revision: ")
             FM = input("Fecha de mantenimiento: ")
 
-            Implante = []
-            #guardamos en lista 
-            Implante.append(I)
+            
             #asignamos el paciente
             pac.asignar_nombre(N)
             pac.asignar_cedula(C)
