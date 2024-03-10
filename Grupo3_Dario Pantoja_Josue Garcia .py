@@ -26,7 +26,7 @@ class Persona:
     def asignar_sexo(self, sexo):
             self.__sexo = sexo
             
-class ImplantesDentales:
+class ImplantesDentales: #clase de implante
     def __init__(self):
         self.__id = 0
         self.__forma = ""
@@ -61,7 +61,7 @@ class ImplantesDentales:
 
     def ver_cantidad(self):
         return self.__cantidad
-class protesis_cadera:
+class protesis_cadera: #clase de implante
     def __init__(self):
         self.__id = 0
         self.__material = ""
@@ -69,6 +69,8 @@ class protesis_cadera:
         self.__tamaño = 0
         self.__cantidad = 0
 
+    #get
+        
     def ver_id(self):
         return self.__id
 
@@ -98,7 +100,7 @@ class protesis_cadera:
 
     def asignar_cantidad(self, cantidad):
         self.__cantidad = cantidad
-class MarcapasosCardiacos:  
+class MarcapasosCardiacos:  #clase de implante
     def __init__(self):
         self.__id = 0
         self.__electrodos = 0
@@ -135,7 +137,8 @@ class MarcapasosCardiacos:
 
     def asignar_cantidad(self, cantidad):
         self.__cantidad = cantidad
-class StentsCoronarios:
+
+class StentsCoronarios: #clase de implante
     def __init__(self):
         self.__id = 0
         self.__longitud = 0
@@ -172,7 +175,8 @@ class StentsCoronarios:
 
     def set_cantidad(self, cantidad):
         self.__cantidad = cantidad
-class ProtesisDeRodillas:
+
+class ProtesisDeRodillas: #clase de implante
     def __init__(self):
         self.__id = 0
         self.__material = ""
@@ -209,7 +213,7 @@ class ProtesisDeRodillas:
 
     def set_cantidad(self, cantidad):
         self.__cantidad = cantidad
-class Paciente(Persona):
+class Paciente(Persona): #paciente hereda de Persona y damos las funciones
     def __init__(self,  implante=None ):
         super().__init__()
         self.__nombre = ""
@@ -291,10 +295,12 @@ class Paciente(Persona):
 
     def asignar_fecha_mantenimiento(self, fecha_mantenimiento):
         self.__fecha_mantenimiento = fecha_mantenimiento
+
 class Medico(Persona):
     def __init__(self, nombre="", cedula=0, sexo="", especialidad=""):
-        super().__init__(nombre, cedula, sexo)
+        super().__init__()
         self.__especialidad = especialidad
+        #variables para el medico heredando de Persona 
 
     def ver_nombre(self):
         return self.__nombre
@@ -329,52 +335,57 @@ class Sistema:
     def ver_pacientes(self):
         return self.__pacientes
 
-    def agregar_paciente(self, paciente):
+    def agregar_paciente(self, paciente):   #agregar paciente al sistema
         if paciente.ver_cedula() in self.__pacientes:
             print(f"Ya existe un paciente con cedula {paciente.ver_cedula()}")
         else:
-            self.__pacientes[paciente.ver_cedula()] = paciente
+            self.__pacientes[paciente.ver_cedula()] = paciente #se agrega al diccionario 
 
-    def eliminar_paciente(self, cedula):
+    def eliminar_paciente(self, cedula):    #eliminar paciente del sistema
         if cedula in self.__pacientes:
             del self.__pacientes[cedula]
         else:
             print(f"No existe un paciente con cedula {cedula}")
 
-    def ver_medicos(self):
+    def ver_medicos(self): #ver medicos en el sistema
         return self.__medicos
 
-    def agregar_medico(self, medico):
+    def agregar_medico(self, medico):  #agregar medico al sistema
         if medico.ver_cedula() in self.__medicos:
             print(f"Ya existe un medico con cedula {medico.ver_cedula()}")
         else:
             self.__medicos[medico.ver_cedula()] = medico
 
-    def eliminar_medico(self, cedula):
+    def eliminar_medico(self, cedula):  #eliminar medico del sistema
         if cedula in self.__medicos:
             del self.__medicos[cedula]
         else:
             print(f"No existe un medico con cedula {cedula}")
-    def ver_implantes(self):
+    def ver_implantes(self): #ver implantes 
         return self.__implantes
 
-    def agregar_implante(self, implante):
+    def agregar_implante(self, implante):  #agregar implante al sistema
         if implante.ver_id() in self.__implantes:
             print(f"Ya existe un implante con id {implante.ver_id()}")
         else:
             self.__implantes[implante.ver_id()] = implante
 
-    def eliminar_implante(self, id):
+    def eliminar_implante(self, id): #eliminar implante del sistema
         if id in self.__implantes:
             del self.__implantes[id]
         else:
             print(f"No existe un implante con el id {id}")
 
-    def verDatosPacienteC(self, c):
+    def verDatosPacienteC(self, c): #buscar paciente en el sistema
         if c in self.__pacientes:
             return self.__pacientes[c]
         else:
             return None
+    
+def validar_N(N): #validar numeros 
+    while  N.isdigit() != True:
+        print("El dato no es valido")
+        N = input("Ingrese un dato valido: ")
 
 
 def main():
@@ -382,19 +393,24 @@ def main():
     while True:
         menu = input("""
                     1. Registro de paciente
-                    2. Buscar paciente
-                    3. Cambiar implantes 
-                    4. Eliminar paciente
-                    5. Salir
+                    2. Buscar paciente 
+                    3. Eliminar paciente
+                    4. Salir
                      """)
         
         if menu == "1":
+            #pedimos informacion de paciente
             N = input("Nombre del paciente: ")
-            C = input("Cedula del paciente: ")
+            C =input("Cedula del paciente: ")
+            validar_N(C) #validar numero 
             S = input("Ingresar genero del paciente: ")
+            #pedimos informacion del medico 
             D = input("Nombre medico: ")
             CD = input("Cedula medico: ")
+            validar_N(CD) #validar numero 
             DS = input("Genero medico: ")
+
+            #asignamos el medico
 
             Med = Medico()
             Med.asignar_nombre(D)
@@ -409,73 +425,80 @@ def main():
                           """))
             pac = Paciente()
             if I == 1:
+                #asignamos para guardar en implante 
                 implante = protesis_cadera()
-                implante.asignar_id(int(input("Id: ")))
+                implante.asignar_id(validar_N(input("Id: ")))
                 implante.asignar_material(input("Material: "))
                 implante.asignar_sistema_fijacion(input("Sistema de fijacion: "))
-                implante.asignar_tamaño(int(input("Tamaño: ")))
-                implante.asignar_cantidad(int(input("Cantidad: ")))
+                implante.asignar_tamaño(validar_N(input("Tamaño: ")))
+                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
 
             elif I == 2:
+                #asignamos para guardar en implante
                 implante = MarcapasosCardiacos()
-                implante.asignar_id(int(input("Id: ")))
-                implante.asignar_electrodos(int(input("Electrodos: ")))
+                implante.asignar_id(validar_N(input("Id: ")))
+                implante.asignar_electrodos(validar_N(input("Electrodos: ")))
                 implante.asignar_tipo_conexion(input("Tipo de conexion: "))
-                implante.asignar_frecuencia_estimulacion(float(input("Frecuencia de estimulacion: ")))
-                implante.asignar_cantidad(int(input("Cantidad: ")))
+                implante.asignar_frecuencia_estimulacion(validar_N(input("Frecuencia de estimulacion: ")))
+                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
 
             elif I == 3:
+                #asignamos para guardar en implante
                 implante = StentsCoronarios()
-                implante.asignar_id(int(input("Id: ")))
-                implante.asignar_longitud(float(input("Longitud: ")))
-                implante.asignar_diametro(float(input("Diametro: ")))
+                implante.asignar_id(validar_N(input("Id: ")))
+                implante.asignar_longitud(validar_N(input("Longitud: ")))
+                implante.asignar_diametro(validar_N(input("Diametro: ")))
                 implante.asignar_material(input("Material: "))
-                implante.asignar_cantidad(int(input("Cantidad: ")))
+                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
 
 
             elif I == 4:
+                #asignamos para guardar en implante
                 implante = ProtesisDeRodillas()
-                implante.asignar_id(int(input("Id: ")))
+                implante.asignar_id(validar_N(input("Id: ")))
                 implante.asignar_material(input("Material: "))
                 implante.asignar_tipo_fijacion(input("Tipo de fijacion: "))
-                implante.asignar_tamaño(int(input("Tamaño: ")))
-                implante.asignar_cantidad(int(input("Cantidad: ")))
+                implante.asignar_tamaño(validar_N(input("Tamaño: ")))
+                implante.asignar_cantidad(validar_N(input("Cantidad: ")))
 
 
             FR = input("Fecha de revision: ")
             FM = input("Fecha de mantenimiento: ")
 
             Implante = []
+            #guardamos en lista 
             Implante.append(I)
+            #asignamos el paciente
             pac.asignar_nombre(N)
             pac.asignar_cedula(C)
             pac.asignar_sexo(S)
             pac.asignar_implantes(Implante)
             pac.asignar_fecha_revision(FR)
             pac.asignar_fecha_mantenimiento(FM)
+            #guardamos el paciente en el sistema 
             Sistem.agregar_paciente(pac)
             
 
         elif menu == "2":
-            C = int(input("Cedula: "))
-            P = Sistem.verDatosPacienteC(C)
-
-            print(P)
-
-            if paciente is not None:
-                print(paciente.ver_nombre())
+            C = input("Cedula: ")
+            validar_N(C) #validamos la cedula
+            P = Sistem.verDatosPacienteC(C) #buscamos la cedula en los pacientes 
+    
+            if paciente is not None:    #si el paciente existe seguira correctamente
+                print(paciente.ver_pacientes())
                 print(paciente.ver_cedula())
                 print(paciente.ver_sexo())
-                paciente.ver_implantes()
+                print(paciente.ver_implantes())
                 print(paciente.ver_fecha_revision())
                 print(paciente.ver_fecha_mantenimiento())
-            else:
+            else: #si el paciente no existe 
                 print("No se encontró el paciente con cédula", C)
 
         elif menu == "3":
-            q = int(input("Cedula: "))
-            p = Sistem.eliminar_paciente(q)
-            print("El paciente con cedula {} a sido eliminado" .format(p))
+            q = input("Cedula: ")
+            validar_N(q)
+            Sistem.eliminar_paciente(q) #eliminamos el paciente con la funcion 
+            print("El paciente con cedula {} a sido eliminado" .format(q))
         
         elif menu == "4":
             break
